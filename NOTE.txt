@@ -1,0 +1,35 @@
+
+
+Comparer Recette :
+
+0 -> Entrer utilisateur:
+
+pate :
+ex :
+	1 - Eau 	1 	l
+	2 - farine 	500	g
+	3 - sucre	2	cc
+
+	
+>>>> 1 Get ingredientRecette
+
+patte au beurre :
+ex : 
+	1 - Eau   	250 g     -> compte 9
+	2 - Beurre	400 g
+	3 - Farine  250 g
+
+
+	
+Comparer
+
+comp eau au 3 ingrédients. 
+d'abord le nom si meme compare unité si meme compare quantité;
+
+Le resultat -> meme nom pour eau farine. meme unité;
+
+
+
+Pourcentage:
+
+chaque ingredient -> X3  compte (nom, quantité type);

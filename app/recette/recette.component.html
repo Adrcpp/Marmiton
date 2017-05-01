@@ -1,0 +1,108 @@
+
+
+<div class="container cyan lighten-5" style="    padding: 3%;">
+	<h1 style="margin-bottom:2%">RECETTE</h1>
+	<div class="row col s12 center">
+		<input type="button" value="Ajouter une recette" (click)="add == false ? add = true : add = false;" class="waves-effect waves-light btn">
+		<div class="center" *ngIf="result">
+			{{result.result}}
+		</div>
+
+		<div *ngIf="add" style="width:50%; margin:auto; display:block;">
+
+			<form class="row center" [formGroup]="myForm" novalidate (ngSubmit)="save(myForm, $event);">
+
+				<div class="form-group col s6">
+					<label>Nom</label>
+					<input formControlName="author" type="text" placeholder="Entrez votre nom ...">
+					<p class="col s12 center red lighten-3" *ngIf="myForm.controls.author.touched && !myForm.controls.author.valid">
+							Required..
+					</p>
+				</div>
+				<div class="form-group col s6">
+					<label>Email</label>
+					<input formControlName="email" type="email" class="validate" placeholder="Entrez un email...">
+					<p class="col s12 center red lighten-3" *ngIf="myForm.controls.email.touched && !myForm.controls.email.valid">
+							  Email non valide.
+					</p>
+				</div>
+			<div class="form-group col s6">
+					<label>Nom de votre recette</label>
+					<input formControlName="name" type="text" placeholder="Entrez un nom de recette ...">
+					<p class="col s12 center red lighten-3" *ngIf="myForm.controls.name.touched && !myForm.controls.name.valid">
+							Required.
+					</p>
+				</div>
+				<div class="form-group col s6">
+					<label>Category</label>
+					<select formControlName="category"  class="select" name="select">
+						<option value="" disabled> --  Selectionner une catégorie -- </option>
+					  <option *ngFor="let c of categories" [value]="c.idcategory">{{c.category | lowercase}}</option>
+					</select>
+					 <!-- <div *ngFor="let c of categories" >{{c.category | lowercase}}</div> -->
+				</div>
+				
+				<div class="col s12">
+				
+				   <div class="file-field input-field">
+					  <div class="btn">
+						<span>Image</span>
+						<input type="file" accept="image/*" (change)="onChange($event)">
+					  </div>
+					  <div class="file-path-wrapper" >
+						<input class="file-path validate" type="text" placeholder="Uploader une image">
+					  </div>
+					</div>
+					
+				</div>
+				<!--Ingredient-->
+				<div class="row col s12" formArrayName="ingredients">
+					<div *ngFor="let ingredient of myForm.controls.ingredients.controls; let i=index">
+						
+						<div class="col s12  indigo lighten-5">
+							<h6>Ingredient {{i + 1}}<a class="secondary-content"> <i *ngIf="myForm.controls.ingredients.controls.length > 1" style="cursor:pointer;" class="material-icons"
+								(click)="removeIngredient(i)">clear</i></a></h6>
+
+						</div>
+						
+						<div [formGroupName]="i" class="col s12">
+						
+							<div>
+								<p>
+								  <input  formControlName="type" type="radio" value="solide" id="{{i}}x"/>
+								  <label for="{{i}}x">Solide</label>
+								</p>
+								<p>
+								  <input  formControlName="type" type="radio" id="{{i}}y" value="liquide" />
+								  <label for="{{i}}y">Liquide</label>
+								</p>
+								
+
+								<input class="form-group col s6"formControlName="nom" style="flex-basis: 50%;" type="text" placeholder="Entrez un nom d'ingredient ...">
+
+								<input class="form-group col s3"formControlName="quantite" style="flex-basis: 10%;" type="number" min="1" placeholder="Quantité">
+								<div class="col s3">
+									<select formControlName="unite" style="flex-basis: 10%;" class="select" name="select">
+										<option value="" disabled> --  Unité -- </option>
+										<option value="cs"> cs </option>
+										<option value="cc"> cc </option>
+										<option *ngIf="myForm.value.ingredients[i].type === 'liquide'" value="ml"> ml </option>
+										<option *ngIf="myForm.value.ingredients[i].type === 'liquide'" value="l">  l </option>
+										<option *ngIf="myForm.value.ingredients[i].type === 'solide'"  value="g">  g  </option>
+										<option *ngIf="myForm.value.ingredients[i].type === 'solide'"  value="kg"> kg </option>
+									</select>
+								</div>
+								
+							</div>
+							
+						</div>
+					</div>
+					<input type="button" value="+ Ingredient" class="waves-effect waves-light btn" (click)="addIngredient();">
+					<button class="btn waves-effect waves-light"  [disabled]="!myForm.valid" >Submit
+						<i class="material-icons right">send</i>
+					</button>
+				</div>	
+			</form>
+		</div>
+	</div>
+</div>

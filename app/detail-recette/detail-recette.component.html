@@ -1,0 +1,74 @@
+
+
+<div class="container cyan lighten-5" style="    padding: 3%;">
+
+	<div class="card row col s12" style="width: 70%; margin: auto;padding: 5%;">
+		<h4>{{recette?.name}} details!</h4>
+		<div><label>id: </label>{{recette?.id}}</div>
+		<div><label>Category </label>{{category?.category}}</div>
+		
+		<div class="col s6">
+			<img class="responsive-img" [src]="url">
+		</div>
+		
+		<h5>Ingrédients</h5>
+		<ul class="col s6" *ngFor="let ingredient of ingredients">
+			<li class="chip">
+				{{ ingredient.nom }} {{ ingredient.quantite }} {{ ingredient.unite }}
+			</li>
+		</ul>
+		<div class="col s12">
+			<div *ngIf="stat?.count > 0">
+				Note moyenne :{{stat?.average}} sur {{stat?.count}} votes
+			</div>
+		</div>
+	</div>
+	<div class="card row" style="width: 70%; margin: auto; padding: 5%; margin-top: 7%;">
+		<div>
+			<h5>Commentaire</h5>
+		</div>
+		
+		<div class="">
+			<form class="row center" [formGroup]="myForm" novalidate (ngSubmit)="save(myForm);">
+				<rating  (ratingClicked)="addNote($event);"></rating>
+				<div class="input-field col s12">
+					<i class="material-icons prefix">account_circle</i><input formControlName="pseudo" type="text">
+				</div>
+				<div class="input-field col s12"> 
+					<i class="material-icons prefix">mode_edit</i><textarea formControlName="commentaire" id="textarea1" class="materialize-textarea"></textarea>
+				</div>
+				
+				<button style="width: 100%;" class="btn waves-effect waves-light" type="submit" [disabled]="!myForm.valid" name="action">Envoyer<i class="material-icons right">reply</i>
+				</button>
+			</form>
+		</div>
+	</div>
+	
+	
+	<div class="row" style="width: 80%; margin: auto; padding: 5%;">
+		<div style="margin-top: 3%;" class="card" *ngFor="let comment of comments">
+		  <div class="card light-blue lighten-4" style=" min-height :40px;">
+			
+				<div class="col s6">
+					<i class="material-icons "> face </i>
+					Pseudo :{{ comment.name }} 
+				</div>
+				
+				<div class="center col s6">
+					<div class= "chip red lighten-4"><i class="material-icons">star</i>
+					Note: {{ comment.note }} /5
+					</div>
+				 </div>
+				 
+			 </div>
+			<div style="min-height :60px;">
+				<p style="margin:2%;"><i style="margin:2%;" class="material-icons">mode_comment</i>{{ comment.comment }}<p>
+			</div>
+		</div>
+	</div>
+	
+<div>
+	<button (click)="goBack()" class="btn waves-effect waves-light" type="submit" name="action">Back
+		<i class="material-icons right">reply</i>
+	</button>
+</div>

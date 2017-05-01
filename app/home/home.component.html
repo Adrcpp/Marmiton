@@ -1,0 +1,38 @@
+<div class="container cyan lighten-5" style="padding: 3%;">
+
+	<div *ngIf="lastRecette != null" style="width: 65%; margin:auto;" class="row col s12">
+		<h5> Dernière recette</h5>
+		<div *ngFor="let recette of arr" >
+			<div class="col s5 card hoverable offset-s1 green lighten-5" style=" cursor: pointer;" (click)="goToDetail(recette)">
+				<div class="card-image" >
+				  <img [src]="recette?.url" style="min-height: 252px">
+				</div>
+				<div class="card-content ">
+					<p>
+					{{recette?.name}}
+					{{recette?.author}}
+					</p>
+				</div>
+			</div>	
+		</div>
+	</div>
+	
+	<div *ngIf="bestRecette != null" style="width: 65%; margin:auto;" class="row col s12">
+		<h5> Meilleur recette</h5>
+		<div *ngFor="let recette2 of arr2" >
+			<div class="col s5 card hoverable offset-s1 green lighten-5" style=" cursor: pointer;" (click)="goToDetail(recette2)">
+				<div class="card-image">
+				  <img [src]="recette2?.url" style="min-height: 252px">
+				</div>
+				<div class="card-content ">
+					
+					<p>{{recette2?.name}}   </p>
+					<p>{{recette2?.author}}	</p>				
+					<p>Note moyenne : {{recette2?.average}} sur {{recette2?.nbvote}} votes</p>
+
+				</div>
+			</div>	
+		</div>
+	</div>
+	
+</div>

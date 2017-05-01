@@ -1,0 +1,27 @@
+
+
+<div class="container cyan lighten-5" style="padding: 3%;">
+
+	<div class="row col s12">
+		<div class="form-group col s6">
+			<h6>Rechercher une recette</h6>
+			<input #name name.value='' type="textarea"><input type="button" value="Rechercher" class="waves-effect waves-light btn" (click)="searchByName(name.value);">
+		</div>
+		
+		<div class="form-group col s6">
+			<h6>Rechercher une recette par ingrédient</h6>
+			<input #recipe recipe.value='' type="textarea"><input type="button" value="Rechercher" class="waves-effect waves-light btn" (click)="searchByRecipe(recipe.value);">
+		</div>
+	</div>	
+	<div *ngIf="result != null" style="width: 65%; margin:auto;">
+		<h5>Resultat</h5>
+		
+		<ul *ngFor="let recette of result.result" (click)="goToDetail(recette)">
+			<div class="card-panel  row center hoverable badge" style="cursor: pointer;">
+				<li >{{recette.name}} </li>
+				<li >de : {{recette.author}} </li>
+				<li >publié le : {{recette.added}} </li>
+			</div>
+		</ul>
+	</div>
+</div>
